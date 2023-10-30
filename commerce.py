@@ -7,7 +7,7 @@ class Brand(Enum):
 
 # Product Class structure
 class Product:
-    def __init__(self, name, bar_code, price):
+    def __init__(self, name: str, bar_code: int, price: float):
         self.name = name
         self.bar_code = bar_code
         self.price = price
@@ -17,7 +17,6 @@ class Product:
     
     def __repr__(self):
         return f"{self.name}"
-
 
 # Creates a new product specialization: "Makeup Products"
 class Makeup_Base(Product):
@@ -54,45 +53,34 @@ class Book(Product):
     
     def __repr__(self):
         return f"{self.name}"
+    
+# Own exception class for selling method
+class NotInStorage(Exception):
+    def __init__(self, mensagem = "Não há este item no estoque!"):
+        self.mensagem = mensagem
+        super().__init__(self.mensagem)
+
 
 # Creates the inventory Class
 class Inventory:
     Storage = []
     Sold_itens = []
 
-    def Restocking(self, Storage):
-        Storage.append(self)
+    # Method that restocks a product
+    def Restocking(self):
+        Inventory.Storage.append(self)
+        print(f"{self.name} was restocked, there are currently {Inventory.Storage.count(self)} itens in stock.")
 
-    def Sell(self, Storage, Sold_itens):
-        if self not in Storage:
-            raise ValueError("Não há deste item no estoque")
-        Storage.remove(self)
-        Sold_itens.append(self)
+    # Method that sells a product
+    def Sell(self):
+        if self not in Inventory.Storage:
+            raise NotInStorage
+        Inventory.Storage.remove(self)
+        Inventory.Sold_itens.append(self)
+        print(f"{self.name} was sold for R${self.price}.")
 
-    def Return(self, Storage, Sold_itens):
-        Storage.append(self)
-        Sold_itens.remove(self)
-
-
-
-# base = Makeup_Base('Base da Vírginia', '1234567', 'R$ 799,99', 'Wepink Beauty')
-# zeus = Headset('Headset Gamer Redragon Zeus', '87217217', 'R$ 199,99', 'Redragon')
-zeus_2 = Headset('Headset Gamer Redragon Zeus 2', 87217216, 399.99)
-zeus_3 = Headset('Headset Gamer Redragon Zeus 3', 87217216, 399.99)
-
-
-print(zeus_2)
-
-lista = [zeus_2]
-
-print(lista)
-
-Inventory.Restocking(zeus_2, Inventory.Storage)
-
-print(Inventory.Storage)
-print(Inventory.Sold_itens)
-
-Inventory.Sell(zeus_2, Inventory.Storage, Inventory.Sold_itens)
-
-print(Inventory.Storage)
-print(Inventory.Sold_itens)
+    # Method that returns a product
+    def Return(self):
+        Inventory.Storage.append(self)
+        Inventory.Sold_itens.remove(self)
+        print(f"{self.name} was returned.")
