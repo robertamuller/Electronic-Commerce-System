@@ -84,6 +84,16 @@ class Inventory:
         Inventory.Sold_itens.remove(self)
         print(f"{self.name} was returned.")
 
+# Creating products
+base_virginia = Beauty_Products('Base da Vírginia', 12057243, 199.99)
+perfume_virginia = Beauty_Products('Perfume Virginia Fonseca Aqua', 98564211, 161.94)
+rademaker_book = Book('A Proof Theory for Description Logics', 74427269, 474.74)
+asla_book = Book('Sobre Malhas Arquimedianas', 77547211, 120.00)
+eduardo_wagner_book = Book('Matemática 1', 32114123, 87.00)
+paulo_cezar_book = Book('Introdução à Geometria Espacial', 98233300, 25.90)
+zeus_2 = Headset('Headset Gamer Redragon Zeus 2', 87217216, 399.99)
+pandora = Headset('Headset Gamer Pandora', 87217217, 560.50)
+
 print('-' * 60, f'\n{"Electronic Commerce System":^60}\n', '-' * 60)
 
 # Restocking
