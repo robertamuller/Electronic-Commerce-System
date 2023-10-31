@@ -18,8 +18,8 @@ class Product:
     def __repr__(self):
         return f"{self.name}"
 
-# Creates a new product specialization: "Makeup Products"
-class Makeup_Base(Product):
+# Creating a new product specialization: "Beauty Products"
+class Beauty_Products(Product):
     def __init__(self, name, bar_code, price):
         super().__init__(name, bar_code, price)
         self.brand = Brand.WEPINK
@@ -30,7 +30,7 @@ class Makeup_Base(Product):
     def __repr__(self):
         return f"{self.name}"
     
-# Creates a new product specialization: "Redragon Headsets"
+# Creating a new product specialization: "Redragon Headsets"
 class Headset(Product):
     def __init__(self, name, bar_code, price):
         super().__init__(name, bar_code, price)
@@ -42,7 +42,7 @@ class Headset(Product):
     def __repr__(self):
         return f"{self.name}"
 
-# Creates a new product specialization: "Books from FGV Editora"
+# Creating a new product specialization: "Books from FGV Editora"
 class Book(Product):
     def __init__(self, name, bar_code, price):
         super().__init__(name, bar_code, price)
@@ -60,8 +60,7 @@ class NotInStorage(Exception):
         self.mensagem = mensagem
         super().__init__(self.mensagem)
 
-
-# Creates the inventory Class
+# Creating the inventory Class
 class Inventory:
     Storage = []
     Sold_itens = []
@@ -84,3 +83,40 @@ class Inventory:
         Inventory.Storage.append(self)
         Inventory.Sold_itens.remove(self)
         print(f"{self.name} was returned.")
+
+print('-' * 60, f'\n{"Electronic Commerce System":^60}\n', '-' * 60)
+
+# Restocking
+Inventory.Restocking(base_virginia)
+Inventory.Restocking(base_virginia)
+Inventory.Restocking(base_virginia)
+Inventory.Restocking(base_virginia)
+Inventory.Restocking(perfume_virginia)
+Inventory.Restocking(perfume_virginia)
+Inventory.Restocking(rademaker_book)
+Inventory.Restocking(rademaker_book)
+Inventory.Restocking(rademaker_book)
+Inventory.Restocking(asla_book)
+Inventory.Restocking(eduardo_wagner_book)
+Inventory.Restocking(paulo_cezar_book)
+Inventory.Restocking(paulo_cezar_book)
+Inventory.Restocking(zeus_2)
+Inventory.Restocking(zeus_2)
+Inventory.Restocking(pandora)
+Inventory.Restocking(pandora)
+Inventory.Restocking(pandora)
+print('-' * 60)
+
+# Sells
+Inventory.Sell(base_virginia)
+Inventory.Sell(rademaker_book)
+Inventory.Sell(rademaker_book)
+Inventory.Sell(zeus_2)
+Inventory.Sell(eduardo_wagner_book)
+Inventory.Sell(pandora)
+print('-' * 60)
+
+# Returning
+Inventory.Return(base_virginia)
+Inventory.Return(pandora)
+print('-' * 60)
